@@ -24,26 +24,97 @@
       </div>
 
       <form id="form" autocomplete="off">
-        <div class="input-group">
-          <label for="input">📝 Enter a Word</label>
-          <input type="text" id="input" value="" placeholder="e.g., love, dream, star">
-          <span class="input-hint">The word you want to explore</span>
+        <div class="form-grid">
+          <div class="input-group form-full-width">
+            <label for="input">📝 Enter a Word</label>
+            <input type="text" id="input" value="" placeholder="e.g., love, dream, star" autocomplete="off">
+            <div id="autocomplete-list" class="autocomplete-list"></div>
+            <span class="input-hint">The word you want to explore</span>
+          </div>
+
+          <div class="input-group">
+            <label for="search-mode">🔍 Search Mode</label>
+            <select id="search-mode">
+              <option value="rel_syn">Synonyms</option>
+              <option value="rel_ant">Antonyms</option>
+              <option value="sl">Sounds Like</option>
+              <option value="sp">Spelled Like (Wildcards)</option>
+              <option value="ml">Means Like (Reverse Dictionary)</option>
+              <option value="rel_trg">Triggers (Statistically Related)</option>
+              <option value="rel_hom">Homophones</option>
+              <option value="rel_jja">Nouns Modified by Adjective</option>
+              <option value="rel_jjb">Adjectives Modifying Noun</option>
+              <option value="rel_spc">Kind of (Hypernyms)</option>
+              <option value="rel_gen">More General Than (Hyponyms)</option>
+              <option value="rel_com">Comprises (Holonyms)</option>
+              <option value="rel_par">Part of (Meronyms)</option>
+              <option value="rel_bga">Frequent Followers</option>
+              <option value="rel_bgb">Frequent Predecessors</option>
+              <option value="rhyme">Rhyme Finder</option>
+            </select>
+            <span class="input-hint">Choose how to find related words</span>
+          </div>
+
+          <div class="input-group">
+            <label for="topic">🏷️ Topic (Optional)</label>
+            <input type="text" id="topic" value="" placeholder="e.g., nature, emotions">
+            <span class="input-hint">Filter by theme</span>
+          </div>
+
+          <div class="input-group">
+            <label for="left-context">⬅️ Left Context</label>
+            <input type="text" id="left-context" value="" placeholder="Word before">
+            <span class="input-hint">Word before target</span>
+          </div>
+
+          <div class="input-group">
+            <label for="right-context">➡️ Right Context</label>
+            <input type="text" id="right-context" value="" placeholder="Word after">
+            <span class="input-hint">Word after target</span>
+          </div>
+
+          <div class="input-group">
+            <label for="result-count">📊 Max Results: <span id="result-count-value">10</span></label>
+            <input type="range" id="result-count" min="1" max="100" value="10">
+            <span class="input-hint">Control result count</span>
+          </div>
         </div>
 
-        <div class="input-group">
-          <label for="topic">🏷️ Enter a Topic (Optional)</label>
-          <input type="text" id="topic" value="" placeholder="e.g., nature, emotions, space">
-          <span class="input-hint">Filter results by a specific theme</span>
+        <div class="checkbox-group-horizontal">
+          <label class="checkbox-label">
+            <input type="checkbox" id="show-definitions" checked>
+            <span>📖 Definitions</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="show-pos" checked>
+            <span>🏷️ Parts of Speech</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="show-syllables">
+            <span>🔢 Syllables</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="show-pronunciation">
+            <span>🔊 Pronunciation</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="show-frequency">
+            <span>📈 Frequency</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="spanish-vocab">
+            <span>🇪🇸 Spanish</span>
+          </label>
         </div>
 
         <button id="submit" type="submit">
-          <span class="btn-text">✨ Find Related Words</span>
+          <span class="btn-text">Find Related Words</span>
         </button>
       </form>
 
       <div id="responseField" class="response-container">
         <div class="placeholder-text">
-          <p>👆 Your word discoveries will appear here!</p>
+          <p>Your word discoveries will appear here!</p>
         </div>
       </div>
       
