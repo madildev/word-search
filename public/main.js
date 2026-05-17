@@ -1,7 +1,5 @@
 // Information to reach API
-const url = 'https://api.datamuse.com/words?key=value';
-const queryParams = 'rel_jjb=';
-const additionalParams = '&topics=';
+const url = 'https://api.datamuse.com/words?';
 
 // Selecting page elements
 const inputField = document.querySelector('#input');
@@ -11,9 +9,9 @@ const responseField = document.querySelector('#responseField');
 
 // AJAX function
 const getSuggestions = () => {
-  const wordQuery = inputField.value;
-  const topicQuery = topicField.value;
-  const endpoint = `${url}${queryParams}${wordQuery} ${additionalParams} ${topicQuery}`;
+  const wordQuery = encodeURIComponent(inputField.value);
+  const topicQuery = encodeURIComponent(topicField.value);
+  const endpoint =`${url}rel_jjb=${wordQuery}&topic=${topicQuery}`;
   
   const xhr = new XMLHttpRequest();
   xhr.responseType = 'json';
@@ -31,10 +29,41 @@ const getSuggestions = () => {
 // Clear previous results and display results to webpage
 const displaySuggestions = (event) => {
   event.preventDefault();
+  
+  // Validation: Check if word input is empty
+  if (!inputField.value.trim()) {
+    responseField.innerHTML = '<p style="color: #ef6b68; font-weight: 600;">⚠️ Please enter a word to search!</p>';
+    return;
+  }
+  
   while(responseField.firstChild){
     responseField.removeChild(responseField.firstChild);
   }
   getSuggestions();
 }
 
+// Handle example button clicks
+const handleExampleClick = (event) => {
+  const word = event.target.dataset.word;
+  const topic = event.target.dataset.topic;
+  
+  if (word && topic) {
+    inputField.value = word;
+    topicField.value = topic;
+    
+    // Clear previous results
+    while(responseField.firstChild){
+      responseField.removeChild(responseField.firstChild);
+    }
+    
+    getSuggestions();
+  }
+}
+
+// Add event listeners
 submit.addEventListener('click', displaySuggestions);
+
+// Add event listeners to example buttons
+document.querySelectorAll('.example-btn').forEach(btn => {
+  btn.addEventListener('click', handleExampleClick);
+});
